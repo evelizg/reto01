@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  sumar2:
+    build: .
+    ports:
+            - "5000:5000"
