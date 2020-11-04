@@ -1,0 +1,1 @@
+CREATE TABLE sumar (num_01 int, num_02 int, resultado int);

@@ -1,0 +1,16 @@
+version: '3'
+services:
+    app:
+        build:
+            dockerfile: Dockerfile
+            context: ./app
+    nginx:
+        restart: always
+        build:
+          dockerfile: Dockerfile
+          context: ./nginx
+
+    bd:
+        build:
+            dockerfile: Dockerfile
+            context: ./postgres
