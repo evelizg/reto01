@@ -25,14 +25,14 @@ node {
         /* 
 			You would need to first register with DockerHub before you can push images to your account
 		*/
-        withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-
-            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-                app.push("${env.BUILD_NUMBER}")
-                app.push("latest")
-            }
-        }
+		withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: params.JP_DockerMechIdCredential, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+			usr = USERNAME
+			pswd = PASSWORD
+		}
+		docker.withRegistry("http://registry.hub.docker.com", params.JP_DockerMechIdCredential) {
+			sh "docker login -u ${usr} -p ${pswd} http://registry.hub.docker.com"
+			app.push("latest")
+		}
                 echo "Trying to Push Docker Build to DockerHub"
     }
 }
