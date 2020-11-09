@@ -24,8 +24,11 @@ node {
     stage('Push image') {
         /* 
 			You would need to first register with DockerHub before you can push images to your account
-		*/           
-        withDockerRegistry([credentialsId: 'dockerhub', url: 'https://registry.hub.docker.com']) {
+		*/
+        withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                
+        withDockerRegistry('', 'dockerhub') {
+            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
