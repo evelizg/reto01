@@ -1,4 +1,11 @@
 node {
+    environment {
+        registry = "eveliz/myapp"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+    }
+    
+    
     def app
 
     stage('Clone repository') {
@@ -24,7 +31,7 @@ node {
         /* 
 			You would need to first register with DockerHub before you can push images to your account
 		*/        
-        withDockerRegistry([credentialsId: 'dockerhub', url: 'https://registry.hub.docker.com']) {
+        docker.withRegistry( '', registryCredential ){
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
