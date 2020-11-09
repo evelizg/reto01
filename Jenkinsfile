@@ -27,7 +27,7 @@ node {
 		*/
         withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 
-        withDockerRegistry([credentialsId: 'dockerhub', url: "https://registry.hub.docker.com"]) {
+        withDockerRegistry(credentialsId: 'dockerhub', url: "https://registry.hub.docker.com") {
             sh "docker login -u ${USERNAME} -p ${PASSWORD}"
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
