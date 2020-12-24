@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mypostdb
+spec:
+  selector:
+      matchLabels:
+        app: mypostdb
+  replicas: 1
+  template:
+      metadata:
+        labels:
+            app: mypostdb
+      spec:
+        containers:
+        - name: mypostdb
+          image: reto01.azurecr.io/mypostdb:v1
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

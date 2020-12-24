@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mypyapp
+spec:
+  selector:
+      matchLabels:
+        app: mypyapp
+  replicas: 1
+  template:
+      metadata:
+        labels:
+            app: mypyapp
+      spec:
+        containers:
+        - name: mypyapp
+          image: reto01.azurecr.io/mypyapp:v2
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

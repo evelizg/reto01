@@ -6,7 +6,7 @@ app = FastAPI()
 
 @app.get("/retoibm/sumar/{sumando01}/{sumando02}")
 async def read_item(sumando01 : int,sumando02 : int):
-	connection = psycopg2.connect(user="postgres", password="docker", host="172.18.0.3", port="5432", database="docker")
+	connection = psycopg2.connect(user="postgres", password="docker", host="10.244.0.35", port="5432", database="docker")
 	cursor = connection.cursor()
 	postgres_insert_query = """ INSERT INTO sumar (num_01, num_02, resultado) VALUES (%s,%s,%s)"""
 	record_to_insert = (sumando01, sumando02, sumando01 + sumando02)
