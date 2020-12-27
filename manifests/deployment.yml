@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: evelizgreto 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evelizgreto
+  template:
+    metadata:
+      labels:
+        app: evelizgreto 
+    spec:
+      containers:
+        - name: evelizgreto 
+          image: reto01.azurecr.io/evelizgreto
+          ports:
+          - containerPort: 80
