@@ -1,19 +1,50 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: evelizgreto 
+  name: mypyapp
 spec:
-  replicas: 1
   selector:
-    matchLabels:
-      app: evelizgreto
+      matchLabels:
+        app: mypyapp
+  replicas: 1
   template:
-    metadata:
-      labels:
-        app: evelizgreto 
-    spec:
-      containers:
-        - name: evelizgreto 
-          image: reto01.azurecr.io/evelizgreto
-          ports:
-          - containerPort: 80
+      metadata:
+        labels:
+            app: mypyapp
+      spec:
+        containers:
+        - name: mypyapp
+          image: reto01.azurecr.io/mypyapp:v2
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mypostdb
+spec:
+  selector:
+      matchLabels:
+        app: mypostdb
+  replicas: 1
+  template:
+      metadata:
+        labels:
+            app: mypostdb
+      spec:
+        containers:
+        - name: mypostdb
+          image: reto01.azurecr.io/mypostdb:v1
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
